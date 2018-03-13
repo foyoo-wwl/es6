@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var arr = ['apple','banana','orange','pear'];
+		var head = ['a','b','c','d']
+		for(var i in arr){
+			//console.log(arr[i])
+		}
+		for(var i of arr){
+			//console.log(i)
+		}
+		var json = {'a':'apple','b':'banana','c':'pear','d':'orange'};
+		for(var name in json){
+			//console.log(name);
+			//console.log(json[name])
+		}
+		// for(var name of json){//不能循环JSON
+		// 	console.log(name)
+		// }
+
+		var map = new Map();
+		for(let i = 0;i<arr.length;i++){
+			map.set(head[i],arr[i])
+		}
+		// 遍历map不能使用for in
+		for(var name of map.entries()){
+			console.log(name)
+		}		
+		for(var [key,value] of map){
+			console.log(key,value)
+		}
+		for(var key of map.keys()){
+			console.log(key)
+		}
+
+
+
+		var books = ['红楼梦','三国演义','水浒传','西游记','肉蒲团'];
+		for(var name of books.entries()){
+			console.log(name)
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		// function Person(name,age){
+		// 	this.name = name;
+		// 	this.age = age;
+		// }
+		// Person.prototype.showName = function(){
+		// 	return this.name
+		// }		
+		// Person.prototype.showAge = function(){
+		// 	return this.age
+		// }
+
+		// var p1 = new Person('abc',10)
+		// alert(p1.showAge())
+
+		class Person{//类
+			constructor(name,age){
+				this.name = name;
+				this.age = age;
+			}
+			showName(){
+				return this.name
+			}
+			// showAge(){
+			// 	return this.age
+			// }
+		}
+
+		// var p1 = new Person('aaa',10);
+
+		// alert(p1.name);
+		// alert(p1.showAge());
+
+
+		// 继承
+		class Worker extends Person{
+			// constructor(name,age,job){
+			// 	this.job = job 
+			// }
+			// showAge(){
+			// 	return this.age
+			// }
+			showJob(){
+				console.log('您的工作室暂无的')
+			}
+		}
+		var p1 = new Person();
+		var w1 = new Worker('mmm',56);
+		w1.showJob()
+	</script>
+</body>
+</html>

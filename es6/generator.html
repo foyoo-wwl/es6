@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		function* show(){
+			yield 'hello';
+			yield 'world';
+			yield 'Es6';
+			return 'wwl'
+
+		}
+		var res = show();
+		//res.next();
+		console.log(res.next());
+		console.log(res.next());
+		console.log(res.next());
+		console.log(res.next());
+		// {value: "hello", done: false}
+		// {value: "world", done: false}
+		// {value: "Es6", done: false}
+		// {value: undefined, done: true}
+		//done表示循环结束,调用四次，结果不同
+		//找到return之后 循环结束
+
+		function* hide(){
+			var a = yield 'hello';
+			return a;
+		}
+		var res = hide();
+		console.log(res.next())
+		console.log(res.next())
+	</script>
+</body>
+</html>

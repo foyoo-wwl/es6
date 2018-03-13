@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		class Person{
+			constructor(name='default',age=0){
+				this.name = name;
+				this.age = age;
+			}
+			showName(){
+				return this.name
+			}
+			showAge(){
+				return this.age
+			}
+		}
+		//继承
+		class Worker extends Person{
+			constructor(name,age,job='saodi'){
+				super(name,age);
+				this.job = job
+			}
+			showJob(){
+				return this.job;
+			}
+		}
+
+		var worker_1 = new Worker()
+		console.log(worker_1.showJob())
+
+		
+	</script>
+</body>
+</html>

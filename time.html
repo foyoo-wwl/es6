@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src='jq.js'></script>
+	<link rel="stylesheet" type="text/css" href="date.css">
+</head>
+<body>
+	<div id="date01">
+		<div id="date02"></div>
+	</div>
+	<script type="text/javascript">
+		window.onload = function(){
+		var myDate = new Date();
+		var oMonth = '';
+		if(myDate.getMonth()<10){oMonth = '0'+(myDate.getMonth()+1)}else{oMonth = myDate.getMonth()+1};
+		var oDate = '';
+		if(myDate.getDate()<10){oDate = '0'+myDate.getDate()}else{oDate = myDate.getDate()};
+		var oStr = oMonth+'月'+oDate+'日';
+
+		//$('#dateFrame').attr('src','date-query.jsp?date='+encodeURI(encodeURI(oStr)));
+
+	    $("#date02").jeDate({
+	        isinitVal:true,
+	        ishmsVal:false,
+	        isClear:false,
+	        isToday:false,
+	        insTrigger:false,
+	        format:"YYYY-MM-DD",
+	        zIndex:3000,
+	        choosefun:function(elem, val) {
+				var str = val.substr(5,2)+'月'+val.substr(8,2)+'日';
+				//$('#dateFrame').attr('src','date-query.jsp?date='+encodeURI(encodeURI(str)));
+	        }
+	    })
+	    	$('#jedatebox').appendTo('#date01');
+		}
+	</script>
+	<script type="text/javascript" src='date.js'></script>
+</body>
+</html>

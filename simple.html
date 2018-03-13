@@ -1,0 +1,304 @@
+<%@ page contentType="text/html; charset=GBK" pageEncoding="GBK"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<!doctype html>
+<html lang="zh-cn">
+<head>
+<meta name="viewport" content="initial-scale=1, user-scalable=0, minimal-ui" charset="GBK">
+<title>投票</title>
+<!-- UC强制全屏 -->
+<meta name="full-screen" content="yes">
+<!-- QQ强制全屏 -->
+<meta name="x5-fullscreen" content="true">
+
+<link rel="stylesheet" type="text/css" href="vote/src/css/pub.css">
+<link rel="stylesheet" type="text/css" href="vote/src/css/index_vote.css">
+<link rel="stylesheet" type="text/css" href="vote/src/css/vote_alert.css">
+<link rel="stylesheet" type="text/css" href="vote/src/css/index.css">
+<script type="text/javascript" src='vote/src/js/jquery-1.10.2.min.js'></script>
+<script src="js/baseutils.js"></script>
+<style>
+main{
+		position:relative;
+		margin-bottom:1rem;
+}
+.content {
+	background-color: #fff;
+    margin: 0;
+    padding:0;
+}
+.lists {
+	background-color: #fff;
+	margin: 0;
+    padding:0;
+}
+		.col{
+			width:3.35rem;
+			overflow:hidden;
+		}
+</style>
+<link rel="stylesheet" href="css/dropload.css">
+
+<script src="js/dropload.min.js"  charset="utf-8"></script>
+<script>
+
+$(document).ready(function(){
+   // var shenName = ['北京','天津','河北','山西','内蒙古','辽宁','吉林','黑龙江','上海','江苏','浙江','安徽','福建','江西','山东','河南','湖北',
+    //                '湖南','广东','广西','海南','重庆','四川','贵州','云南','西藏','陕西','甘肃','青海','宁夏','新疆','台湾','香港','澳门'];
+                 //   var shenLength = shenName.length;
+                //   var  option_wwl = [];
+                 ///   for(var i = 0;i<shenLength;i++){
+                  //    option_wwl += '<option>'+shenName[i]+'</option>';
+
+                  //  }
+                 //   $('select').append(option_wwl);
+	$("#sfselect").val("${sf}");
+	$("#sfselect").find("option[text='${sf}']").attr("selected",true);
+	
+});
+
+
+$(function() {
+	var rootpath = getRootPath();
+	var pageIndex = 1;
+	var sf= encodeURI(encodeURI("${sf}"));
+	var name=encodeURI(encodeURI("${name}"));;
+	
+	//
+	var 
+	containerWidth 	= $("lists").width(),
+	$divs 			= $(".rank_vote_box"),
+	imgWidth 		= $divs.eq(0).width(),
+	cols 			= Math.floor(containerWidth / imgWidth),
+	spacing 		= (containerWidth - cols*imgWidth) / (cols + 1),
+	result 			= '',
+	position 		= [0,0];
+// for(var i = 0 ; i < cols ; i++){
+// 	result += "<div class='col' style='display:inline-block;width:"+imgWidth+"px;margin-left:"+spacing+"px;vertical-align:top;border:none'></div>"
+// 	position.push(0);
+// }
+//$(result).appendTo("lists");	
+$divs.detach().each(function(index,element){
+	var shortIndex = $.inArray(Math.min.apply(null,position),position);
+	$('.col').eq(shortIndex).append(element);
+	position[shortIndex] += $(element).outerHeight(true);
+});
+var winHeight = $(window).height(), loading = false;
+var winHeight = $(window).height();
+var scrollTop = $(this).scrollTop();
+
+	
+	// dropload
+		 var dropload =$('.content')
+				.dropload(
+						{
+							scrollArea : window,
+							loadDownFn : function(me) {
+								$
+										.ajax({
+											type : "post", //使用get方法访问后台 
+											dataType : "json",//返回json格式的数据 
+											url : rootpath + "/questionnaire/tpfjsgetxmlist.action",//要访问的后台地址 
+											data : "page=" + pageIndex+"&sf="+sf+"&name="+name,//要发送的数据 
+											contentType:"application/x-www-form-urlencoded; charset=GBK",											
+											success : function(msg) {
+												var data = eval(msg.data);
+												pageIndex=pageIndex+1;
+												var result = '';
+												if ( data.length==0) {
+													me.lock();
+													me.noData();
+												}
+												$.each(data, function(i, n) {
+													result += "<div class='rank_vote_box'>";
+													result += "<div class='img_part'>";
+													//result += "<img  src='/voteimg/"+n.photo+"' id='votexm_img'>";
+													result += "<img  src='vote/images/demo_img_03.png' id='votexm_img'>";
+													result += "<span class='span_num'>"+n.type2+"</span>";
+													result += "</div>";
+													result += "<div class='txt_part'>";
+													result += "<p id='votexm_subject'>"+n.name+"</p>";
+													result += "<div class='btns'>";
+													result += "<span id='votexm_votenum'>"+n.votenum+"</span>";
+													
+													if(n.isvoted==0){
+													result += "<div class='vote_btn vote_btn_wtp' id='"+n.xmid+"' data-isvoted='"+n.isvoted+"' data-isflowwer='"+n.isflowwer+"'></div>";
+													}else{
+													result += "<div class='vote_btn vote_btn_ytp' id='"+n.xmid+"' data-isvoted='"+n.isvoted+"' data-isflowwer='"+n.isflowwer+"'></div>";
+													}
+												//	result += "<div class='vote_xmdesc' style='display:none;'>"+n.xmdesc1+"</div>";
+													
+													result += "</div>";
+													result += "</div>";
+													result += "</div>";
+												});
+												// 为了测试，延迟1秒加载
+										//		setTimeout(function() {
+													//$('.lists').append(result);
+													// 每次数据加载完，必须重置
+													    
+													   // var $container = $('lists');
+											/*		    $container.imagesLoaded(function() {
+													        $container.masonry({
+													                itemSelector: '.rank_vote_box',
+													                gutter: 4,
+													                isAnimated: true,
+													            });
+													     });
+											*/
+													    
+													    $('.vote_btn').each(function(){
+													        $(this).click(function(){
+													         
+													        	vote_btn_click($(this).attr("id"),".rank_vote_box");
+													        })
+													      })
+						
+														$(result).each(function(index,element){
+															var shortIndex = $.inArray(Math.min.apply(null,position),position);
+															$('.col').eq(shortIndex).append(element);
+															position[shortIndex] += $(element).outerHeight(true);
+														});
+													    
+													    
+													    me.resetload();
+											//	}, 1000);
+												
+												
+											},
+											error : function(xhr, type) {
+												alert("投票数据加载异常.");
+												// 即使加载出错，也得重置
+												me.lock();
+												//me.resetload();
+												//m
+											}
+										});
+							}
+						});
+		
+		
+		$(".serch_btn").click(function(){
+		  $("#selform").submit();
+		});
+		
+		
+		$(".btn_follw").click(function(){
+			var xmid=$(".btn_vote").data("xmid");
+		   if($(this).text()=="取消关注"){
+			  
+			   $.ajax({
+					type : "post", //使用get方法访问后台 
+					dataType : "json",//返回json格式的数据 
+					url : rootpath + "/questionnaire/tpfjscanceguanzhu.action",//要访问的后台地址 
+					data : "xmid=" + xmid,//要发送的数据 
+					success : function(msg) {
+						$(".btn_follw").text("关注");
+						 $("#"+xmid).data("isflowwer","0");
+					},
+					error : function(xhr, type) {
+						alert("投票数据加载异常.");
+					}
+				});
+			   
+			   
+		   }else{
+			   $.ajax({
+					type : "post", //使用get方法访问后台 
+					dataType : "json",//返回json格式的数据 
+					url : rootpath + "/questionnaire/tpfjsaddguanzhu.action",//要访问的后台地址 
+					data : "xmid=" + xmid,//要发送的数据 
+					success : function(msg) {
+						$(".btn_follw").text("取消关注"); 
+						$("#"+xmid).data("isflowwer","1");
+					},
+					error : function(xhr, type) {
+						alert("投票数据加载异常.");
+					}
+				});
+			
+			
+		   };
+		   
+		});
+		
+		$(".btn_vote").click(function(){
+		    var votenum_text=$(".vote_num").text();
+			var num= parseInt(votenum_text);
+			var xmid=$(this).data("xmid");
+
+			$.ajax({
+				type : "post", //使用get方法访问后台 
+				dataType : "json",//返回json格式的数据 
+				url : rootpath + "/questionnaire/tpfjsaddvote.action",//要访问的后台地址 
+				data : "xmid=" + xmid,//要发送的数据 
+				success : function(msg) {
+					var data = msg.data;
+					if(data==1){
+						$(".vote_num").text(num+1);
+						$('.serch_box_mask').find(".btn_vote").removeClass("btn_vote_wtp");
+			        	 $('.serch_box_mask').find(".btn_vote").addClass("btn_vote_ytp");
+			        	 
+			        	 $("#"+xmid).removeClass("vote_btn_wtp");
+			        	 $("#"+xmid).addClass("vote_btn_ytp");
+			        	 $("#"+xmid).data("isvoted","1");
+					}else if(data==-1){
+						alert("该项目您今天已经投过票了");
+					}else if(data==-2){
+						alert("您今天已经达到设定投票数量，请明天再投。");
+					}
+				},
+				error : function(xhr, type) {
+					alert("投票数据加载异常.");
+				}
+			});
+		});
+			
+		
+		
+	});
+</script>
+
+
+</head>
+<body>
+
+<form id="selform" action="tpfvote.action" method="post">
+	<div class="serch_box">
+		<div class="serch_left">
+			<!--<select id="sfselect" name="sf"></select>-->
+			<s:select id="sfselect" name="sf" headerKey="" headerValue="全部省份" list="commMap" /> 
+		</div>
+		<div class="serch_right">
+			<input type="text" name="name" value="${name}" placeholder="姓名">
+			<div class="serch_btn"></div>
+		</div>
+	</div>
+</form>
+	<main>
+
+
+	<div class="content">
+	<div class="lists">
+		<div class="col" style="float:left;"></div>
+		<div class="col" style="float:right"></div>
+	</div>
+
+	</div>
+	</main>
+
+
+ <%String[] footer_class={"sy_color","sy_color","","","","","",""}; %>
+	<%@ include file="include/footer.jspf"%>
+	
+ <%@ include file="include/serch_box_mask.jspf"%>
+ 
+
+<script type="text/javascript" src='vote/src/js/rem.js'  charset="utf-8"></script>
+<script type="text/javascript" src='vote/src/js/fastclick.js'  charset="utf-8"></script>
+<script type="text/javascript" src='vote/src/js/masonry-docs.min.js'  charset="utf-8"></script>
+<script type="text/javascript" src='vote/src/js/index_vote.js'  charset="utf-8"></script>
+<script type="text/javascript" src='vote/src/js/mask.js'  charset="utf-8"></script>
+
+
+</body>
+</html>

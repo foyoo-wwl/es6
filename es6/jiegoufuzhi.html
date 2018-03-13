@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		// var a = 23;
+		// var b = 4;
+		// var c = 101;
+
+		// var [a,b,c] = [12,5,101];
+		// console.log(a+"--"+b+"--"+c)
+
+		// var {a,b,c} = {b:5,a:12,c:101}; 
+		// console.log(a,b,c)
+		// // 模式匹配
+		// var [d,[e,f],g] = [12,[1,2],5];
+		// console.log(d,e,f,g)
+
+		// var [{a,c},[e,f],g] = [{a:'eeeee',c:'aaaaa'},[1,2],5];
+		// console.log(a,c,e,f,g)
+
+		// 交互
+		var weiboJson = {
+		    "statuses": [
+		        {
+		            "created_at": "Tue May 31 17:46:55 +0800 2011",
+		            "id": 11488058246,
+
+		            }
+		    ],
+		    "ad": [
+		        {
+		            "id": 3366614911586452,
+		            "mark": "AB21321XDFJJK"
+		        }
+		    ]
+		}
+		// var {statuses:[{created_at,id}],ad} = weiboJson;
+		// console.log(statuses,ad,created_at,id);
+		//给默认值
+		var {time=12,id=0} = {};
+		console.log(time,id );
+
+
+		function wwl(){
+			return{left:100,stop:1000}
+		}
+		var {left,stop} = wwl();
+		console.log(left,stop)
+	</script>
+</body>
+</html>

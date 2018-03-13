@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		li{
+			width:20px;
+			
+			background:red;
+			list-style:none;
+			margin-right:10px;
+			position:relative;
+			bottom:0;
+			display:inline-block;
+		}
+		ul{
+		}
+	</style>
+</head>
+<body>
+    <input type="text" id="inNum" name="number">
+    <button id="btnLeftIn">左侧入</button>
+    <button id="btnRightIn">右侧入</button>
+    <button id="btnLeftOut">左侧出</button>
+    <button id="btnRightOut">右侧出</button>
+    <!--数字队列-->
+    <ul id="outNum"></ul>
+	<script type="text/javascript">
+		window.onload = function(){
+			var txt = document.getElementById('inNum');
+			var btn_left = document.getElementById('btnLeftIn');
+			var btn_right = document.getElementById('btnRightIn');
+			var btnLeftOut = document.getElementById("btnLeftOut");
+            var btnRightOut = document.getElementById("btnRightOut");  
+			var uls = document.getElementById('outNum');
+			function queueNum(a){
+				var txt_value = txt.value;
+				if(!txt_value || (txt_value>100) || (txt_value<10) || (isNaN(txt_value))){
+					alert('输入内容格式不正确');
+				}else{
+					var element = document.createElement('li');
+					if(a.id === 'btnRightIn'){
+						element.style.height = txt_value + 'px';
+						uls.append(element);
+					}else if(a.id === 'btnLeftIn'){
+						element.style.height = txt_value + 'px';
+						uls.insertBefore(element,uls.firstChild);						
+					}
+
+				}
+			}
+			function removeNum(node,direction){
+				if(uls.childNodes.length === 0){
+					alert('没有需要删除的数字');
+					return false;
+				}
+				else if(direction === 'left'){
+					uls.removeChild(uls.firstChild);
+				}
+				else if(direction === 'right'){
+					uls.removeChild(uls.lastChild);
+				}else{
+					uls.removeChild(node);
+				}
+			}
+			btn_left.onclick = function(){
+				queueNum(this);
+			}
+			btn_right.onclick = function(){
+				queueNum(this);
+			}
+			btnLeftOut.onclick = function(){
+				removeNum(-1,'left');
+			}
+			btnRightOut.onclick = function(){
+				removeNum(-1,'right');
+			}
+			uls.onclick = function(){
+				removeNum(event.target);
+			}
+		}
+	</script>
+</body>
+</html>

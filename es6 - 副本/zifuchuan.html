@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="ul">
+		
+	</div>
+	<script type="text/javascript">
+		var a = '周杰伦'
+		var str = `
+			<div>
+				<ul>
+					<li>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, ${a}euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</li>
+					<li>Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam  ${a}erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.</li>
+					<li>Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus. Nam nulla quam, gravida non, commodo a, sodales  ${a}sit amet, nisi.</li>
+					<li>Pellentesque fermentum dolor. Aliquam quam lectus, facilisis auctor, ultrices ut, elementum vulputate,  ${a}nunc.</li>
+				</ul>
+			</div>
+		`
+		var uls = document.getElementById('ul');
+		uls.innerHTML = str;
+	</script>
+</body>
+</html>

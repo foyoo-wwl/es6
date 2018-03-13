@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		@media screen and (orientation: portrait) {
+		      html{
+		        width :15000px;
+		         height : 100% ;
+		          background-color: white ;
+		          overflow : hidden;
+		      }
+		      body{
+		          width : 15000px;
+		         height : 100% ;
+		         background-color: red ;
+		          overflow : hidden;
+		      }
+		      #print{
+		         position : absolute ;
+		         background-color: yellow ;
+		      }
+		} 
+		@media screen and (orientation: landscape) {
+		       html{
+		         width :15000px;
+		         height : 100% ;
+		         background-color: white ;
+		      } 
+		       body{
+		         width :15000px;
+		         height : 100% ;
+		         background-color: white ;
+		      }
+		           #print{
+		            position : absolute ;
+		            top : 0 ; 
+		            left : 0 ;
+		            width : 15000px ;
+		            height : 100% ;
+		            background-color: yellow ;
+		         }
+		}
+		#print p{
+		        margin: auto ;
+		        margin-right : 20px ;
+		        text-align: center;
+				float:left;
+		      }		
+	</style>
+</head>
+<body>
+	<body class="webpBack">
+	  <div id="print">
+	      <p>lol</p>
+	      <p>lol</p> <p>lol</p> <p>lol</p> <p>lol</p> <p>lol</p> <p>lol</p> <p>lol</p> <p>lol</p> <p>lol</p> <p>lol</p> <p>lol</p> <p>lol</p>   
+	   </div>
+	</body>
+	<script type="text/javascript" src='jq.js'></script>
+	<script type="text/javascript">
+		  var width = document.documentElement.clientWidth;
+		  var height =  document.documentElement.clientHeight;
+		  if( width < height ){
+		      console.log(width + " " + height);
+		      $print =  $('#print');
+		      // $print.width(height);
+		      //  $print.height(width);
+		      $print.css('top',  (height-width)/2 );
+		      $print.css('left',  0-(height-width)/2 );
+		      $print.css('transform' , 'rotate(90deg)');
+		       $print.css('transform-origin' , '50% 50%');
+		 }
+	</script>
+</body>
+</html>

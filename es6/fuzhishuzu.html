@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		window.onload = function(){
+		// 方法一
+			// var arr = [1,2,3],
+			// 	arr2 = [];
+			// for(let i = 0;i<arr.length;i++){
+			// 	arr2.push(arr[i]);
+			// 	console.log(i)
+			// }
+			// arr.pop();
+			// arr.push('jaychou');
+			// arr.unshift('小仙女');
+			// console.log(arr,arr2);
+		// 方法二
+			// var arr=[1,2,3];
+			// var arr2 = Array.from(arr);
+			// arr.pop();
+			// arr.push('jaychou');
+			// arr.unshift('小仙女');
+			// console.log(arr,arr2);	
+		//方法三
+			var arr = [1,2,31,55];
+			var arr2 = [...arr];
+			arr.pop();
+			arr.push('jaychou');
+			arr.unshift('小仙女');
+			console.log(arr,arr2);	
+
+
+			function show(...args){
+				args.push(5 )
+				console.log(args)
+			}					
+			show(1,2,3,4)
+
+
+		}
+	</script>
+</body>
+</html>

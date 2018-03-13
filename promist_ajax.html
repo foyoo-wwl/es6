@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="button" name="" value='aaa' id='btn1'>
+	<script type="text/javascript">
+		window.onload = function(){
+			let oBtn = document.getElementById('btn1');
+			function ajax(url,funSucc,fnFail){
+				var oAjax = new XMLHttpRequest();
+				oAjax.open("GET",url,true);
+				oAjax.send();
+				oAjax.onload = function(){
+					if(oAjax.readyState ==4 && oAjax.status==200){
+						funSucc(oAjax.responseText)
+					}else{
+						fnFail(oAjax.status)
+					}
+				}
+			}
+			oBtn.onclick = function(){
+				ajax('a.txt',function(str){
+					alert(str)
+				},function(){
+					alert(str)
+				});
+			}
+		}
+	</script>
+</body>
+</html>

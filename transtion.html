@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<style type="text/css">
+    *{margin:0px;padding:0px}
+    .box{
+        width:100px;
+        height:100px;
+        background:red;
+        margin-bottom:100px;
+        /*-webkit-transition-property:all;*/ 
+/*        transition-property:all;
+        transition-duration:5s;
+                -webkit-transition-duration:5s;
+                -moz-transition-duration:5s;
+                -o-transition-duration:5s;
+        transition-delay:2s;
+                -webkit-transition-delay:2s;
+                -moz-transition-delay:2s;
+                -o-transition-delay:2s;
+        transition-timing-function:linear;
+                -webkit-transition-timing-function:linear;
+                -moz-transition-timing-function:linear;
+                -o-transition-timing-function:linear
+		transform:width;*/
+    }
+    /*.box:hover{width:1000px}*/
+</style>
+ 
+<div class="box"></div>
+<div class="box2 box"></div>	
+<script type="text/javascript" src='jq.js'></script>
+<script type="text/javascript">
+	$(function(){
+		$(document).click(function(){
+			$('.box2').animate({
+				opacity:0,width:'1300px'},500)
+		})
+	})
+</script>
+</body>
+</html>

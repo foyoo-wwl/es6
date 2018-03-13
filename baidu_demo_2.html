@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 01</title>
+  </head>
+<body>
+
+  <h3>污染城市列表</h3>
+  <ul id="aqi-list">
+<!--   
+    <li>第一名：福州（样例），10</li>
+      <li>第二名：福州（样例），10</li> -->
+  </ul>
+
+<script type="text/javascript">
+
+      // var aqiData = [
+      //   ["北京", 90],
+      //   ["上海", 50],
+      //   ["福州", 10],
+      //   ["广州", 50],
+      //   ["成都", 80],
+      //   ["西安", 100]
+      // ];
+      // var box =[];
+      // var box_2 = []
+      // (function () {
+      //   var aqi_length = aqiData.length;
+      //   var uls = document.getElementById('aqi-list');
+      //   for(var i = 0;i<aqi_length;i++){
+      //     if(aqiData[i][1] >=60){
+      //         box.push(aqiData[i][1]);
+      //     }
+      //   }
+
+      //   box.sort(function(a, b){
+      //       return a-b;
+      //     });
+      //   console.log(box);
+      //   // var html ='';
+      //   // for(var i = 0;i<box.length;i++){
+          
+      //   //   html += "<li>"+aqiData[box[i]][0]+"---"+aqiData[box[i]][1]+"</li>";
+      //   // }
+      //   // uls.innerHTML = html;
+      // })();
+
+var aqiData = [
+  ["北京", 90],
+  ["上海", 50],
+  ["福州", 10],
+  ["广州", 50],
+  ["成都", 90],
+  ["西安", 100]
+];
+(function () {
+  /*
+  在注释下方编写代码
+  遍历读取aqiData中各个城市的数据
+  将空气质量指数大于60的城市显示到aqi-list的列表中
+  */
+            var aqi = document.getElementById("aqi-list");
+            var good = aqiData.filter(function(x){
+              return x[1]>60;
+            });
+            good.sort(function(a, b){
+              return b[1] - a[1];
+            });
+            
+            (function new_li(){
+              for(var i=0; i< good.length; i++){
+                var li = document.createElement("li");
+                aqi.append(li);
+                li.innerHTML = "第" + (i+1) + "名: " + good[i];
+              }
+            })();
+})();
+    //   var list=aqiData.filter(function(item,index,array){
+    //     return(item[1]>=60);
+    //   });
+    //    list.sort(function(a,b){
+    //     return b[1]-a[1];
+    //    });
+    //  list.forEach(
+    //   function(item,index,array){
+       
+    //     var newnode=document.createElement("li");
+    //     newnode.innerHTML=array[index][0]+":"+array[index][1];
+    //     cont.appendChild(newnode);
+        
+    //   }
+    // );
+</script>
+</body>
+</html>

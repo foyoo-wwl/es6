@@ -1,0 +1,141 @@
+<!-- <!DOCTYPE HTML>
+<html> 
+<head> 
+<meta charset="utf-8">
+<title>img - complete attribute</title>
+</head> 
+<body>
+<img id="img1" src="http://pic1.win4000.com/wallpaper/f/51c3bb99a21ea.jpg">
+<p id="p1">loading...</p>
+<script type="text/javascript">
+		var p1 = document.getElementById('p1');
+		function imgLoad(img, callback) {
+			var timer = setInterval(function() {
+			if (img.complete) {
+					callback(img)
+					clearInterval(timer)
+				}
+			}, 50)
+		}
+		imgLoad(img1, function() {
+			p1.innerHTML('加载完毕');
+		})
+</script>
+</body>
+</html> -->
+<!-- <!DOCTYPE HTML>
+<html> 
+<head> 
+<meta charset="utf-">
+<title>img - readystatechange event</title>
+</head> 
+<body>
+<img id="img1" src="http://pic126.nipic.com/file/20170411/24838494_102559193000_2.jpg">
+<img id="img1" src="http://img82.nipic.com/file/20170427/24838494_164558856000_1.jpg">
+<img id="img1" src="http://pic126.nipic.com/file/20170411/24838494_102559193000_2.jpg">
+<img id="img1" src="http://pic126.nipic.com/file/20170411/24838494_102559193000_2.jpg">
+<img id="img1" src="http://pic126.nipic.com/file/20170411/24838494_102559193000_2.jpg">
+<img id="img1" src="http://pic126.nipic.com/file/20170411/24838494_102559193000_2.jpg">
+<img id="img1" src="http://pic126.nipic.com/file/20170411/24838494_102559193000_2.jpg">
+<img id="img1" src="http://pic126.nipic.com/file/20170411/24838494_102559193000_2.jpg">
+<p id="p">loading...</p>
+<script type="text/javascript" src='jq.js'></script>
+<script type="text/javascript">
+	$(function(){
+		$('img').each(function() {
+			$(this).load(function(){
+				$(this).fadeIn();
+				alert('a');
+			});
+	    });
+	})
+</script>
+</body>
+</html> -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+	<img src="http://pic.58pic.com/58pic/12/32/79/02D58PIC9Xt.jpg" alt="" class='pic1'>
+	<img src="http://pic.58pic.com/58pic/13/76/88/18S58PICGde_1024.jpg" alt="" class='pic1'>
+	<img src="http://img.taopic.com/uploads/allimg/120422/94353-1204221S45728.jpg" alt="" class='pic1'>
+	<img src="http://img10.3lian.com/c1/newpic/10/35/36.jpg" alt="" class='pic1'>
+	<img src="http://pic.58pic.com/58pic/13/46/50/61758PICWZY_1024.jpg" alt="" class='pic1'>
+	<button id='load'>测试</button>
+<body>
+	<script type="text/javascript" src='jq.js'></script>
+		<script type="text/javascript">
+		$(function(){
+			$('.pic1').each(function() {
+					$(this).load(function(){
+						console.log(1111)
+						});
+				});
+		})
+		</script>
+</body>
+</html> -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<img src="http://pic.58pic.com/58pic/12/32/79/02D58PIC9Xt.jpg" alt="" class='pic1'>
+	<img src="http://pic.58pic.com/58pic/13/76/88/18S58PICGde_1024.jpg" alt="" class='pic1'>
+	<img src="http://img.taopic.com/uploads/allimg/120422/94353-1204221S45728.jpg" alt="" class='pic1'>
+	<img src="http://img10.3lian.com/c1/newpic/10/35/36.jpg" alt="" class='pic1'>
+	<img src="http://pic.58pic.com/58pic/13/46/50/61758PICWZY_1024.jpg" alt="" class='pic1'>
+	<script language="JavaScript">
+		    document.getElementsByTagName("img")[4].onload = function () {
+		        	alert("图片加载已完成");
+		    }
+	</script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		img{
+			width:30px;
+			height:30px;
+			display:block;
+			display:inline-block;
+		}
+	</style>
+</head>
+<body>
+	<img src="http://pic.58pic.com/58pic/12/32/79/02D58PIC9Xt.jpg" alt="" class='pic1'>
+	<img src="http://pic.58pic.com/58pic/13/76/88/18S58PICGde_1024.jpg" alt="" class='pic1'>
+	<img src="http://img.taopic.com/uploads/allimg/120422/94353-1204221S45728.jpg" alt="" class='pic1'>
+	<img src="http://img10.3lian.com/c1/newpic/10/35/36.jpg" alt="" class='pic1'>
+	<img src="http://pic.58pic.com/58pic/13/46/50/61758PICWZY_1024.jpg" alt="" class='pic1'>	
+	<script type="text/javascript" src='jq.js'></script>
+	<script type="text/javascript">
+		var imgdefereds=[];
+		$('img').each(function(){
+		 var dfd=$.Deferred();
+		 $(this).bind('load',function(){
+		 dfd.resolve();
+		 }).bind('error',function(){
+		 //图片加载错误，加入错误处理
+		 // dfd.resolve();
+		 console.log('错误')
+		 })
+		 if(this.complete) setTimeout(function(){
+		 dfd.resolve();
+		 },1000);
+		 imgdefereds.push(dfd);
+		})
+		$.when.apply(null,imgdefereds).done(function(){
+		 	alert('成功')
+		});
+	</script>
+</body>
+</html>

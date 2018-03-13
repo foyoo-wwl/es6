@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		// var person = {
+		// 	name:'jaychou',
+		// 	age:16,
+		// 	showName:()=>{
+		// 		console.log(this.name)
+		// 	},
+		// 	showAge:()=>{
+		// 		console.log(this.age)
+		// 	}
+		// }
+		// person.showName()
+		var name = 'abb',
+			age = 15;
+		var person = {
+			age,
+			name,
+			showNmae(){
+				return this.name
+			},
+			showAge(){
+				return this.age
+			}
+		}
+		console.log(person.showNmae())
+	</script>
+</body>
+</html>

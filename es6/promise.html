@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var p1 = new Promise(function(resolve,reject){
+			//resolve 成功了
+			//reject 失败了
+			resolve(1)
+		});
+		p1.then(function(value){
+			return value+1
+		},function(){
+			alert('失败了')
+		}).then(function(value){
+			console.log(value)
+		});
+	</script>
+</body>
+</html>
